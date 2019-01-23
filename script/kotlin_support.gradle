@@ -1,0 +1,41 @@
+ext {
+    kotlin_version = "1.3.11"
+
+    kotlin_classpath = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+    kotlin_std = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+    kotlin_test = "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+
+    kotlin_test_junit = "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+
+    kotlin_support = rootDir.getAbsolutePath() + "/script/kotlin_support.gradle"
+}
+
+if (project != rootProject) {
+
+    apply plugin: 'kotlin-android'
+
+    apply plugin: 'kotlin-android-extensions'
+
+    android {
+        androidExtensions {
+            experimental = true
+            defaultCacheImplementation = "SPARSE_ARRAY"
+        }
+
+//        sourceSets {
+//            androidTest.java.srcDirs += 'src/androidTest/kotlin'
+//            main.java.srcDirs += 'src/main/java'
+//            test.java.srcDirs += 'src/test/java'
+//        }
+    }
+
+    dependencies {
+        implementation kotlin_std
+        testImplementation kotlin_test
+        testImplementation kotlin_test_junit
+        androidTestImplementation kotlin_test
+        androidTestImplementation kotlin_test_junit
+    }
+}
